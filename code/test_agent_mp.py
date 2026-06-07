@@ -36,7 +36,7 @@ if __name__ == "__main__":
     print("Test 1: Loading sample_agent.py via multiprocessing")
     print("=" * 50)
 
-    agent = load_agent("sample_agent.py")
+    agent = load_agent("code/sample_agent.py")
     print(f"  Agent loaded: {agent}")
 
     game = XOShiftGame(3)
@@ -69,7 +69,7 @@ if __name__ == "__main__":
     print("Test 2: Loading your_agent.py (advanced AI) via multiprocessing")
     print("=" * 50)
 
-    agent2 = load_agent("your_agent.py")
+    agent2 = load_agent("code/your_agent.py")
     print(f"  Agent loaded: {agent2}")
 
     game2 = XOShiftGame(3)
@@ -102,8 +102,8 @@ if __name__ == "__main__":
     print("Test 3: Both agents in an agent-agent game simulation")
     print("=" * 50)
 
-    agent_x = load_agent("sample_agent.py")
-    agent_o = load_agent("your_agent.py")
+    agent_x = load_agent("code/sample_agent.py")
+    agent_o = load_agent("code/your_agent.py")
     game3 = XOShiftGame(3)
     players = ["X", "O"]
     agents = {"X": agent_x, "O": agent_o}
@@ -141,8 +141,8 @@ if __name__ == "__main__":
     print("=" * 50)
 
     # This is exactly what happens when agent1 and agent2 both point to sample_agent.py
-    agent_same_1 = load_agent("sample_agent.py")
-    agent_same_2 = load_agent("sample_agent.py")
+    agent_same_1 = load_agent("code/sample_agent.py")
+    agent_same_2 = load_agent("code/sample_agent.py")
     print(f"  agent1: {agent_same_1}")
     print(f"  agent2: {agent_same_2}")
     print(f"  Same object? {agent_same_1 is agent_same_2}")

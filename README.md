@@ -85,18 +85,21 @@ The agent runs in a **separate process** with a strict 2-second timeout. If the 
 
 ```
 XOShift-Game/
-├── main.py                    # Game loop, event handling, agent orchestration
-├── game.py                    # XOShiftGame (board rules, move logic, win detection)
-├── ui.py                      # Pygame UI (menu, board rendering, replay browser)
-├── utils.py                   # Font loading, text rendering helpers
-├── agent_loader.py            # Dynamic agent module loader
-├── agent_utils.py             # Agent helpers (valid move enumeration)
-├── sample_agent.py            # Random baseline agent
-├── your_agent.py              # Competitive AI agent (Minimax + Alpha-Beta)
+├── code/
+│   ├── main.py                    # Game loop, event handling, agent orchestration
+│   ├── game.py                    # XOShiftGame (board rules, move logic, win detection)
+│   ├── ui.py                      # Pygame UI (menu, board rendering, replay browser)
+│   ├── utils.py                   # Font loading, text rendering helpers
+│   ├── agent_loader.py            # Dynamic agent module loader
+│   ├── agent_utils.py             # Agent helpers (valid move enumeration)
+│   ├── sample_agent.py            # Random baseline agent
+│   ├── your_agent.py              # Competitive AI agent (Minimax + Alpha-Beta)
+│   └── test_agent_mp.py           # Multiprocessing agent tests
 ├── assets/
 │   └── Alegreya-Regular.otf   # Custom display font
 ├── replays/                   # Saved game replays (JSON) → created on first run
 ├── requirements.txt           # Python dependencies
+├── .gitignore                 # Git ignore rules
 ├── README.md                  # This file
 └── Report.pdf                 # Project report
 ```
@@ -129,7 +132,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # 5. Run the game
-python main.py
+python code/main.py
 ```
 
 ### Dependencies
@@ -181,8 +184,8 @@ def agent_move(board: List[List[Optional[str]]], player_symbol: str) -> Tuple[in
 Then select your agent in the **Agent vs Agent** or **Human vs Agent** mode — the game automatically loads files via `agent_loader.py`. Edit `main.py` to point to your agent file:
 
 ```python
-agent1_path_config = "your_agent.py"
-agent2_path_config = "sample_agent.py"
+agent1_path_config = "code/your_agent.py"
+agent2_path_config = "code/sample_agent.py"
 ```
 
 ---
