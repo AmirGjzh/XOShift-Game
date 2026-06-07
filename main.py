@@ -47,7 +47,7 @@ def main_loop():
 
     agent1: Optional[Callable] = None
     agent2: Optional[Callable] = None
-    agent1_path_config = "sample_agent.py"
+    agent1_path_config = "your_agent.py"
     agent2_path_config = "sample_agent.py"
 
     current_move_history: List[Dict[str, Any]] = []
