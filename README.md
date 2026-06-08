@@ -217,6 +217,6 @@ The project was tested across all board sizes (3×3, 4×4, 5×5) and game modes:
 
 ---
 
-## 📝 License
+## 📜 License
 
-This project was developed as an AI course project. Feel free to use, modify, and extend.\
+This project is licensed under the MIT License.
