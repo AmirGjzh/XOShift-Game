@@ -219,4 +219,4 @@ The project was tested across all board sizes (3×3, 4×4, 5×5) and game modes:
 
 ## 📜 License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
