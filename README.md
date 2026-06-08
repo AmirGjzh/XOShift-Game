@@ -96,12 +96,12 @@ XOShift-Game/
 │   ├── your_agent.py              # Competitive AI agent (Minimax + Alpha-Beta)
 │   └── test_agent_mp.py           # Multiprocessing agent tests
 ├── assets/
-│   └── Alegreya-Regular.otf   # Custom display font
-├── replays/                   # Saved game replays (JSON) → created on first run
-├── requirements.txt           # Python dependencies
-├── .gitignore                 # Git ignore rules
-├── README.md                  # This file
-└── Report.pdf                 # Project report
+│   └── Alegreya-Regular.otf       # Custom display font
+├── replays/                       # Saved game replays (JSON) → created on first run
+├── requirements.txt               # Python dependencies
+├── .gitignore                     # Git ignore rules
+├── README.md                      # This file
+└── Report.pdf                     # Project report
 ```
 
 ---
@@ -115,23 +115,15 @@ XOShift-Game/
 ### Steps
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/your-username/XOShift-Game.git
-cd XOShift-Game
-
-# 2. (Recommended) Create a virtual environment
 python -m venv venv
 
-# 3. Activate the virtual environment
 # On Windows:
 venv\Scripts\activate
 # On macOS/Linux:
 source venv/bin/activate
 
-# 4. Install dependencies
 pip install -r requirements.txt
 
-# 5. Run the game
 python code/main.py
 ```
 
@@ -172,7 +164,7 @@ def agent_move(board: List[List[Optional[str]]], player_symbol: str) -> Tuple[in
     Args:
         board:      Current board state (N×N list of 'X', 'O', or None)
         player_symbol: The agent's symbol ('X' or 'O')
-    
+
     Returns:
         A tuple (src_row, src_col, tgt_row, tgt_col) representing the move.
     """
@@ -227,10 +219,4 @@ The project was tested across all board sizes (3×3, 4×4, 5×5) and game modes:
 
 ## 📝 License
 
-This project was developed as an AI course project. Feel free to use, modify, and extend.
-
----
-
-## 👤 Author
-
-**Amir Mohammad Ganjizade** — AI Project 402243093
+This project was developed as an AI course project. Feel free to use, modify, and extend.\

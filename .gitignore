@@ -1,34 +1,26 @@
-# Python bytecode & cache
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
 *$py.class
 
-# Virtual environments
 venv/
 .venv/
 env/
 
-# Game replays (JSON files saved from gameplay)
 replays/
 !replays/.gitkeep
 
-# IDE & editor files
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# macOS
 .DS_Store
 
-# Windows
 Thumbs.db
 
-# Build artifacts
 *.egg-info/
 dist/
 build/
-
