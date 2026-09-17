@@ -1,30 +1,6 @@
-# XOShift Game ♟️
+# ♟️ XOShift
 
-**XOShift** is an adversarial two-player board game with a unique "shift" mechanic — instead of simply placing pieces, players **push pieces along rows and columns** from one edge of the board to another. This project features a fully playable Pygame GUI, support for human and AI players, a replay system, and a competitive AI agent powered by **Minimax search with Alpha-Beta pruning, iterative deepening, and Zobrist hashing**.
-
----
-
-## 🎮 Game Rules
-
-### Board
-- Played on an **N×N** grid (N = 3, 4, or 5).
-- The **rim** (outermost ring of cells) is the only interactive area.
-
-### Moves
-A move consists of two steps:
-
-1. **Select a source cell** on the rim:
-   - If any rim cell is **empty**, you **must** select an empty one.
-   - If all rim cells are occupied, you must select **one of your own pieces** on the rim.
-
-2. **Push to a target cell** on the rim:
-   - You shift all pieces in the selected row/column one step toward the target, then place your symbol at the target.
-
-> **Example:** Selecting cell `(0, 2)` and pushing left to `(0, 0)` shifts the pieces in row 0 left by one, and your piece ends up at `(0, 0)`.
-
-### Win Condition
-- **N-in-a-row:** Fill an entire row, column, or diagonal with your symbol (`X` or `O`).
-- Maximum **250 turns** before the game is declared a draw.
+XOShift is a two-player board game with a twist: instead of just placing pieces, you push them along rows and columns from one edge of the board to the other. This repo has a full Pygame GUI, human and AI players, a replay system, and a competitive AI agent built on Minimax with Alpha-Beta pruning, iterative deepening, and Zobrist hashing.
 
 ---
 
@@ -32,62 +8,21 @@ A move consists of two steps:
 
 | Feature | Description |
 |---|---|
-| **Three Board Sizes** | 3×3, 4×4, and 5×5 |
-| **Three Game Modes** | Human vs Human, Human vs Agent, Agent vs Agent |
-| **Replay System** | Record games (JSON) and step through them with ⬅️/➡️ arrows |
-| **Custom AI Agents** | Drop-in Python agents — dynamically loaded at runtime |
-| **Sample Random Agent** | Baseline agent that picks random valid moves |
-| **Competitive AI Agent** | Minimax + Alpha-Beta + Zobrist hashing + iterative deepening |
-| **Pygame GUI** | Interactive board with hover highlights, selection states, and game-over overlay |
+| Three board sizes | 3×3, 4×4, and 5×5 |
+| Three game modes | Human vs Human, Human vs Agent, Agent vs Agent |
+| Replay system | Games are saved as JSON and can be stepped through with ⬅️ / ➡️ |
+| Custom agents | Drop in your own Python agent — loaded dynamically at runtime |
+| Sample agent | A baseline agent that just picks random valid moves |
+| Competitive agent | Minimax + Alpha-Beta + Zobrist hashing + iterative deepening |
+| Pygame GUI | Hover highlights, selection states, game-over overlay |
 
----
-
-## 🧠 AI Agent: `your_agent.py`
-
-The intelligent agent (`your_agent.py`) combines several advanced game-AI techniques:
-
-### 1. Minimax Algorithm
-A recursive depth-first search that explores the game tree. The agent assumes the opponent plays optimally and chooses moves that maximize its own minimum guaranteed outcome.
-
-### 2. Alpha-Beta Pruning
-Eliminates branches that cannot possibly influence the final decision, dramatically reducing the number of nodes evaluated. The agent uses two bounds:
-- **α (alpha):** Best score the maximizing player can guarantee
-- **β (beta):** Best score the minimizing player can guarantee
-
-### 3. Iterative Deepening (IDDFS)
-The agent searches to increasing depths (1 → 2 → 3 → 4) within the **2-second time limit**. If time runs out, it falls back to the best move found at the previous completed depth.
-
-### 4. Move Ordering
-Moves are ordered to maximize pruning efficiency:
-- **Winning moves** (immediate win) come first
-- **Rest** sorted by evaluation score
-- **Losing moves** (opponent can win next turn) come last
-
-### 5. Evaluation Function
-A weighted heuristic that evaluates non-terminal board states:
-
-| Component | Weight | Description |
-|---|---|---|
-| **Piece Count** | ×1.0 | Difference in number of pieces on the board |
-| **Mobility** | ×0.8 | Difference in number of legal moves available |
-| **Threats** | ×1.2 | Difference in "almost-winning" lines (N−1 of a kind) |
-| **Position** | ×0.5 | Positional value: corners and center weighted higher |
-
-### 6. Zobrist Hashing + Transposition Table
-Each board state is hashed using **Zobrist hashing** (random 64-bit values per cell/symbol). A transposition table caches evaluated positions to avoid redundant computation across search branches.
-
-### 7. Time Management
-The agent runs in a **separate process** with a strict 2-second timeout. If the agent exceeds the limit, its turn is skipped.
-
----
-
-## 🔧 Project Structure
+## 📁 Project Structure
 
 ```
 XOShift-Game/
 ├── code/
 │   ├── main.py                    # Game loop, event handling, agent orchestration
-│   ├── game.py                    # XOShiftGame (board rules, move logic, win detection)
+│   ├── game.py                    # XOShiftGame — board rules, move logic, win detection
 │   ├── ui.py                      # Pygame UI (menu, board rendering, replay browser)
 │   ├── utils.py                   # Font loading, text rendering helpers
 │   ├── agent_loader.py            # Dynamic agent module loader
@@ -97,29 +32,27 @@ XOShift-Game/
 │   └── test_agent_mp.py           # Multiprocessing agent tests
 ├── assets/
 │   └── Alegreya-Regular.otf       # Custom display font
-├── replays/                       # Saved game replays (JSON) → created on first run
-├── requirements.txt               # Python dependencies
-├── .gitignore                     # Git ignore rules
-├── README.md                      # This file
-└── Report.pdf                     # Project report
+├── replays/                       # Saved game replays (JSON), created on first run
+├── requirements.txt
+├── .gitignore
+├── README.md
+└── Report.pdf
 ```
 
----
+## 🚀 Getting Started
 
-## 🚀 Installation & Setup
+**Prerequisites**
+- Python 3.8+ (tested on 3.10+)
+- pip
 
-### Prerequisites
-- **Python 3.8+** (tested with Python 3.10+)
-- **pip** (Python package manager)
-
-### Steps
+**Install**
 
 ```bash
 python -m venv venv
 
-# On Windows:
+# Windows:
 venv\Scripts\activate
-# On macOS/Linux:
+# macOS/Linux:
 source venv/bin/activate
 
 pip install -r requirements.txt
@@ -127,29 +60,60 @@ pip install -r requirements.txt
 python code/main.py
 ```
 
-### Dependencies
-- **pygame-ce** (≥2.5.0) — Community Edition fork of Pygame. Used for all graphics, input handling, and rendering.
+**Dependencies**
 
-> **Note:** If you're using Python 3.14, `pygame` (original) has no pre-built wheels yet, so `pygame-ce` is required. On Python ≤3.13, you can use either `pygame` or `pygame-ce`.
+`pygame-ce` (≥2.5.0) — the Community Edition fork of Pygame, used for all graphics and input.
 
----
+> On Python 3.14, regular `pygame` doesn't have prebuilt wheels yet, so `pygame-ce` is the one to use. On 3.13 and below, either works.
 
-## 🕹️ How to Play
+## 🎮 Game Rules
 
-1. **Main Menu** — Choose:
-   - Board size (3×3, 4×4, or 5×5)
-   - Game mode (Human vs Human, Human vs Agent, Agent vs Agent)
-   - Toggle replay recording
+**Board** — an N×N grid (N = 3, 4, or 5). Only the rim (the outermost ring of cells) is interactive.
 
-2. **Playing** — Click a **rim cell** to select it, then click a **target rim cell** to push the piece.
+**A move has two steps:**
 
-3. **Agent Matches** — Agent moves are computed automatically with a 2-second thinking limit.
+1. **Pick a source cell on the rim.**
+   - If any rim cell is empty, you have to pick an empty one.
+   - If the rim is full, you pick one of your own pieces instead.
+2. **Push it to a target cell on the rim.**
+   - Every piece in that row/column shifts one step toward the target, then your symbol lands on the target.
 
-4. **Game Over** — The winner is announced with an overlay. Press **Return** or click the button to return to the menu.
+> Example: picking (0, 2) and pushing left to (0, 0) shifts row 0 left by one, and your piece ends up at (0, 0).
 
-5. **Replays** — Navigate through recorded games using the ⬅️ / ➡️ arrow keys in replay mode.
+**Winning** — get N of your symbol in a row, column, or diagonal. If nobody wins within 250 turns, it's a draw.
 
----
+## ▶️ How to Play
+
+1. **Main menu** — pick your board size, game mode, and whether to record a replay.
+2. **Playing** — click a rim cell to select it, then click a target rim cell to push your piece there.
+3. **Agent matches** — agents move automatically, with a 2-second thinking limit each turn.
+4. **Game over** — the winner shows up on an overlay. Press Return or click the button to head back to the menu.
+5. **Replays** — step through a recorded game with the ⬅️ / ➡️ arrow keys.
+
+## 🧠 How the AI Agent Works
+
+`your_agent.py` is the competitive agent, and it combines a few classic game-AI techniques:
+
+**1. Minimax** — explores the game tree assuming the opponent plays optimally, and picks the move that maximizes its own guaranteed outcome.
+
+**2. Alpha-Beta pruning** — cuts off branches that can't affect the final decision, using two bounds: α (best score the maximizer can guarantee) and β (best score the minimizer can guarantee).
+
+**3. Iterative deepening** — searches depth 1, then 2, then 3, and so on within a 2-second budget. If time runs out mid-search, it falls back to the best move found at the last completed depth.
+
+**4. Move ordering** — moves are sorted to prune more effectively: immediate wins first, then by evaluation score, with moves that hand the opponent a win last.
+
+**5. Evaluation function** — a weighted heuristic for non-terminal positions:
+
+| Component | Weight | What it measures |
+|---|---|---|
+| Piece count | ×1.0 | Difference in pieces on the board |
+| Mobility | ×0.8 | Difference in legal moves available |
+| Threats | ×1.2 | Difference in "one away from winning" lines |
+| Position | ×0.5 | Corners and center weighted higher |
+
+**6. Zobrist hashing + transposition table** — each board state gets hashed (random 64-bit values per cell/symbol), and a transposition table caches evaluated positions so the search doesn't redo work across branches.
+
+**7. Time management** — the agent runs in a separate process with a strict 2-second timeout. If it goes over, that turn is skipped.
 
 ## 🤖 Writing Your Own Agent
 
@@ -173,50 +137,49 @@ def agent_move(board: List[List[Optional[str]]], player_symbol: str) -> Tuple[in
     return valid_moves[0]
 ```
 
-Then select your agent in the **Agent vs Agent** or **Human vs Agent** mode — the game automatically loads files via `agent_loader.py`. Edit `main.py` to point to your agent file:
+Then point `main.py` at your file — it gets loaded automatically via `agent_loader.py`:
 
 ```python
 agent1_path_config = "code/your_agent.py"
 agent2_path_config = "code/sample_agent.py"
 ```
 
----
-
 ## 📊 Replay System
 
-- Replays are saved as JSON files in the `replays/` directory.
-- Format:
-  ```json
-  {
-    "metadata": {
-      "board_size": 5,
-      "game_mode": "human-agent",
-      "player_x_type": "human",
-      "player_o_type": "your_agent",
-      "winner": "X"
-    },
-    "moves": [
-      {"player": "X", "src_r": 0, "src_c": 2, "tgt_r": 0, "tgt_c": 4},
-      {"player": "O", "src_r": 4, "src_c": 1, "tgt_r": 4, "tgt_c": 0},
-      ...
-    ]
-  }
-  ```
-- Browse and step through replays from the **Replay a Game** menu option.
+Replays are saved as JSON in `replays/`:
 
----
+```json
+{
+  "metadata": {
+    "board_size": 5,
+    "game_mode": "human-agent",
+    "player_x_type": "human",
+    "player_o_type": "your_agent",
+    "winner": "X"
+  },
+  "moves": [
+    {"player": "X", "src_r": 0, "src_c": 2, "tgt_r": 0, "tgt_c": 4},
+    {"player": "O", "src_r": 4, "src_c": 1, "tgt_r": 4, "tgt_c": 0}
+  ]
+}
+```
+
+Browse and step through them from the **Replay a Game** menu option.
 
 ## 🧪 Testing
 
-The project was tested across all board sizes (3×3, 4×4, 5×5) and game modes:
-- **Human vs Human** — Full manual play verification
-- **Human vs Agent** — Agent within time limit, valid moves only
-- **Agent vs Agent** — Two agents playing autonomously with replay recording
-- **Replay System** — Forward/backward stepping, load/restart flow
-- **Edge Cases** — Draw after 250 turns, board full, timeout handling
+Tested across all board sizes and game modes:
 
----
+- **Human vs Human** — full manual play verification
+- **Human vs Agent** — agent stays within the time limit and only makes valid moves
+- **Agent vs Agent** — two agents playing autonomously, with replay recording
+- **Replay system** — forward/backward stepping, load/restart flow
+- **Edge cases** — draw at 250 turns, full board, timeout handling
+
+## 🤝 Contributing
+
+Found a bug or have an idea? Open an issue or send a pull request — contributions are always welcome.
 
 ## 📜 License
 
-This project is licensed under the **MIT License**.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
