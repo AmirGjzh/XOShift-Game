@@ -176,10 +176,6 @@ Tested across all board sizes and game modes:
 - **Replay system** — forward/backward stepping, load/restart flow
 - **Edge cases** — draw at 250 turns, full board, timeout handling
 
-## 🤝 Contributing
+## 👤 Author
 
-Found a bug or have an idea? Open an issue or send a pull request — contributions are always welcome.
-
-## 📜 License
-
-This project is licensed under the MIT License.
+Made with ❤️ by [AmirMohammad Ganjizade](https://github.com/AmirGjzh)
